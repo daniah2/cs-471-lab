@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %} My First Index HTML Page {% endblock title %}
 {% block content %}
+<div class="topnav"> <!-- add class attribute -->
+    <a class="active" href="{% url "books.index" %}">Home</a> <!-- URL template tag-->
+    <a href="{% url "books.list_books" %}">List Books</a> <!-- URL template tag -->
+    <a href="{% url "books.aboutus" %}">About</a> <!-- URL template tag -->
+</div>
 <h1 style="color: blue;">This is heading 1 (Library)</h1> <!-- add inline css -->
 <p style="color: white;background-color: black;">This is a paragraph text </p> <!--
 add inline css -->

@@ -12,6 +12,8 @@ pip-delete-this-directory.txt
 celerybeat-schedule.*
 # Environments
 .env
+**/djangoenv/
+.djangoenv
 .venv
 env/
 venv/

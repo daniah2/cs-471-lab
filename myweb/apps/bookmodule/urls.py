@@ -10,4 +10,5 @@ urlpatterns = [
     path('html5/listing', views.listing, name="books.listing"),
     path('html5/links', views.link, name= "books.link"),
     path('html5/tables', views.tables, name= "books.tables"),
+    path('search/', views.search, name= "books.search")
 ]

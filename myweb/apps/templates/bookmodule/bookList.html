@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<form class="searchForm" method="post" action="">
+    {% csrf_token %}
+    <label>Keywords:</label>
+    <input type="text" name="keyword" placeholder="enter a keyword"/>
+    <br/>
+    <label>Search in:</label>
+    <input type="checkbox" name="option1"/><label>Title</label>
+    <input type="checkbox" name="option2"/><label>Author</label>
+    <br/>
+    <button type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+    </form>
+    
+
+
+
+{% if books %}
+
+
+
+<table border="1" cellpadding="5" cellspacing="0">>
+    <tr>
+        <th>title</th>
+        <th>author</th>
+    </tr>
+    {% for book in books  %}
+    <tr>
+        <td>
+            {{book.title}}
+        </td>
+        <td>
+            {{book.author}}
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endif %}
+
+
+{% endblock content %}
