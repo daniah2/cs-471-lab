@@ -1,0 +1,9 @@
+<ul>
+    {% if books %}
+        {% for obj in books %}
+            <li>Title: {{ obj.title }}, Author: {{ obj.author }}, Price: {{ obj.price }}, Edition: {{ obj.edition }}</li>
+        {% endfor %}
+    {% else %}
+        <p>Not found</p>
+    {% endif %}
+</ul>
