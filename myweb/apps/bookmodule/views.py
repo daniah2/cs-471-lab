@@ -199,7 +199,7 @@ def upload_image(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('upload_image')
+            return redirect(upload_image)
     else:
         form = ImageForm()
     return render(request, 'bookmodule/upload_image.html', {'form': form})
