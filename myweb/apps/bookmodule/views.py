@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render , redirect
-from .models import Book
+from .models import *
+from django.db.models import Q , Count, Sum, Avg, Max, Min
 
 def index(request):
  return render(request, "bookmodule/index.html")
@@ -88,3 +89,43 @@ def lookup_query(request):
      return render(request, 'bookmodule/index.html')
       
   
+def insert_books():
+    Book.objects.create(title="Continuous Delivery", author="J. Humble and D. Farley", price=120.00, edition=3)
+    Book.objects.create(title="Reversing: Secrets of Reverse Engineering", author="E. Eilam", price=97.00, edition=2)
+    Book.objects.create(title="The Hundred-Page Machine Learning Book", author="Andriy Burkov", price=100.00, edition=4)
+    Book.objects.create(title="Clean Code", author="Robert C. Martin", price=55.00, edition=2)
+    Book.objects.create(title="Design Patterns: Elements of Reusable Object-Oriented Software", author="Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides", price=75.00, edition=1)
+    Book.objects.create(title="The Pragmatic Programmer", author="Andrew Hunt and David Thomas", price=50.00, edition=2)
+    Book.objects.create(title="The Mythical Man-Month", author="Fred Brooks", price=60.00, edition=1)
+    Book.objects.create(title="Introduction to Algorithms", author="Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein", price=150.00, edition=3)
+    Book.objects.create(title="Refactoring: Improving the Design of Existing Code", author="Martin Fowler", price=45.00, edition=2)
+    Book.objects.create(title="The Clean Coder: A Code of Conduct for Professional Programmers", author="Robert C. Martin", price=40.00, edition=1)
+
+
+def task1(request):
+    books = Book.objects.filter(Q(price__lte=50))
+    return render(request,'bookmodule/task1.html',{'books':books})
+
+def task2(request):
+    books = Book.objects.filter(Q(edition__gt=2) & (Q(title__icontains='qu') | Q(author__icontains='qu')))
+    return render(request, 'bookmodule/task2.html', {'books': books})
+
+def task3(request):
+    books = Book.objects.exclude(
+        Q(edition__gt=2) & (Q(title__icontains='qu') | Q(author__icontains='qu'))
+    )
+    return render(request, 'bookmodule/task2.html', {'books': books})
+
+def task4(request):
+    books = Book.objects.order_by('title')
+    return render(request, 'bookmodule/task2.html', {'books': books})
+
+def task5(request):
+    stats = Book.objects.aggregate(
+        total_books=Count('id'),
+        total_price=Sum('price'),
+        average_price=Avg('price'),
+        max_price=Max('price'),
+        min_price=Min('price')
+    )
+    return render(request, 'bookmodule/task5.html', {'stats': stats})
