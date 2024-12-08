@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book
+from .models import *
 
 
 class BookForm(forms.ModelForm):
@@ -11,5 +11,10 @@ class BookForm(forms.ModelForm):
     author= forms.CharField(max_length=100,required=True,label='Author',widget=forms.TextInput())
     price = forms.DecimalField(required=True,label='Price',initial=0)
     edition = forms.IntegerField(required=True,label='Edition',initial=1,widget=forms.NumberInput())
-    
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = ImageModel
+        fields = ['title', 'image']
+
 

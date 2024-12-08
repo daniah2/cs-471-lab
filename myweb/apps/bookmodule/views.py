@@ -3,7 +3,7 @@ from django.shortcuts import render , redirect
 from .models import *
 from django.db.models import Q , Count, Sum, Avg, Max, Min
 from django.urls import reverse
-from .forms import BookForm
+from .forms import *
 
 
 def index(request):
@@ -192,3 +192,14 @@ def delete_book_with_form(request, id):
     book = Book.objects.get(id=id)
     book.delete()
     return HttpResponseRedirect(reverse('books.listbooks'))
+
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_image')
+    else:
+        form = ImageForm()
+    return render(request, 'bookmodule/upload_image.html', {'form': form})

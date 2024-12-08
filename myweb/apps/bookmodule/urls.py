@@ -27,6 +27,7 @@ urlpatterns = [
     path('lab9_part2/addbook/', views.add_book_with_form, name='books.addbook'),
     path('lab9_part2/editbook/<int:id>/', views.edit_book_with_form, name='books.editbook'),
     path('lab9_part2/deletebook/<int:id>/', views.delete_book_with_form, name='books.deletebook'),
+    path('upload/', views.upload_image, name='books.upload_image'),
 
 
 
